@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gabriel & Talita</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        * {
+            color: #fff;
+        }
+        .fotos-fixas {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 22px;
+            max-width: 100vw;
+            overflow-x: auto;
+            margin: 0 auto 30px auto;
+            padding-bottom: 10px;
+        }
+        .fotos-fixas img {
+            width: 340px;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+            background: #222;
+            transition: transform 0.2s;
+        }
+        .fotos-fixas img:hover {
+            transform: scale(1.04);
+        }
+        .mensagem-amor {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-size: 1.12em;
+            background: #181818;
+            padding: 22px 18px 18px 18px;
+            border-radius: 12px;
+            line-height: 1.6;
+            box-shadow: 0 2px 10px rgba(255,255,255,0.03);
+        }
+        .frase-universo {
+            font-size: 1.25em;
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 18px;
+            margin-top: 22px;
+            letter-spacing: 1px;
+        }
+        .contador-box {
+            display: inline-block;
+            background: transparent;
+            padding: 24px 12px 18px 12px;
+            margin: 0 0 20px 0;
+        }
+        .contador-tempo {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+        }
+        .tempo-item {
+            background: #181818;
+            border: 2px solid #fff;
+            border-radius: 12px;
+            min-width: 80px;
+            min-height: 80px;
+            padding: 16px 10px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 16px rgba(255,255,255,0.06);
+        }
+        .tempo-numero {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        .tempo-legenda {
+            font-size: 1em;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+        audio {
+            display: none !important;
+        }
+        h1 {
+            color: #f00;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 1100px) {
+            .fotos-fixas img {
+                width: 50vw;
+                height: 50vw;
+                max-width: 340px;
+                max-height: 340px;
+            }
+            .fotos-fixas {
+                gap: 12px;
+            }
+        }
+        @media (max-width: 700px) {
+            .fotos-fixas img {
+                width: 90vw;
+                height: 90vw;
+                max-width: 340px;
+                max-height: 340px;
+            }
+            .fotos-fixas {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Gabriel & Talita</h1>
+    <div class="mensagem-amor">
+        Meu amor,<br><br>
+        Queria te lembrar o quanto você é especial pra mim. Cada momento ao seu lado faz meu coração bater mais forte. Seu sorriso ilumina meus dias, sua voz acalma minha alma, e seu amor me faz sentir a pessoa mais sortuda do mundo.<br><br>
+        Você é meu porto seguro, meu abrigo, minha melhor escolha todos os dias. Te amar é fácil, natural, e a melhor coisa que já me aconteceu.<br><br>
+        Obrigado por existir e por ser exatamente quem você é. Te amo mais do que palavras podem dizer. ❤️
+    </div>
+    <!-- Fotos lado a lado, grandes e fixas -->
+    <div class="fotos-fixas">
+        <img src="foto1.jpg" alt="Casal tirando selfie no shopping">
+        <img src="foto2.jpg" alt="Casal tirando selfie no elevador">
+        <img src="foto3.jpg" alt="Casal tirando selfie em ambiente interno">
+        <img src="foto4.jpg" alt="Casal juntos à beira-mar">
+        <img src="foto5.jpg" alt="Casal tirando selfie no shopping">
+        <img src="foto6.jpg" alt="Casal segurando filhotes">
+    </div>
+    <div class="frase-universo">
+        Criando nosso próprio universo de amor há
+    </div>
+    <div class="contador-box">
+        <div class="contador-tempo" id="contador-tempo"></div>
+    </div>
+    <audio id="musica" src="musica.mp3" loop></audio>
+    <script>
+        // Data do começo do relacionamento: 12/08/2017
+        const dataComeco = new Date("2017-08-12T00:00:00");
+
+        function atualizarContador() {
+            const agora = new Date();
+
+            let anos = agora.getFullYear() - dataComeco.getFullYear();
+            let meses = agora.getMonth() - dataComeco.getMonth();
+            let dias = agora.getDate() - dataComeco.getDate();
+            let horas = agora.getHours() - dataComeco.getHours();
+            let minutos = agora.getMinutes() - dataComeco.getMinutes();
+            let segundos = agora.getSeconds() - dataComeco.getSeconds();
+
+            if (segundos < 0) {
+                segundos += 60;
+                minutos--;
+            }
+            if (minutos < 0) {
+                minutos += 60;
+                horas--;
+            }
+            if (horas < 0) {
+                horas += 24;
+                dias--;
+            }
+            if (dias < 0) {
+                let mesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0);
+                dias += mesAnterior.getDate();
+                meses--;
+            }
+            if (meses < 0) {
+                meses += 12;
+                anos--;
+            }
+
+            document.getElementById("contador-tempo").innerHTML = `
+                <div class="tempo-item">
+                    <span class="tempo-numero">${anos}</span>
+                    <span class="tempo-legenda">anos</span>
+                </div>
+                <div class="tempo-item">
+                    <span class="tempo-numero">${meses}</span>
+                    <span class="tempo-legenda">meses</span>
+                </div>
+                <div class="tempo-item">
+                    <span class="tempo-numero">${dias}</span>
+                    <span class="tempo-legenda">dias</span>
+                </div>
+                <div class="tempo-item">
+                    <span class="tempo-numero">${horas.toString().padStart(2, '0')}</span>
+                    <span class="tempo-legenda">horas</span>
+                </div>
+                <div class="tempo-item">
+                    <span class="tempo-numero">${minutos.toString().padStart(2, '0')}</span>
+                    <span class="tempo-legenda">min</span>
+                </div>
+                <div class="tempo-item">
+                    <span class="tempo-numero">${segundos.toString().padStart(2, '0')}</span>
+                    <span class="tempo-legenda">seg</span>
+                </div>
+            `;
+        }
+
+        atualizarContador();
+        setInterval(atualizarContador, 1000);
+
+        // Música ao clicar
+        let musicaTocada = false;
+        function tocarMusica() {
+            if (!musicaTocada) {
+                document.getElementById('musica').play();
+                musicaTocada = true;
+            }
+        }
+        document.body.addEventListener('click', tocarMusica);
+        document.body.addEventListener('touchstart', tocarMusica); // Para mobile
+    </script>
+</body>
+</html>
